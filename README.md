@@ -3,10 +3,10 @@
 The repo contains Pine scripts that are tested to work on specific stock, specific settings, and specific time. 
 
 ## Note
-..* Each folder contains a strategy script, an study script, and a readme file.
-..* The strategy script is used for back testing. 
-..* The study script is used as indicators on when to buy and when to sell. 
-..* The readme me file explains the strength and weekness of the strategy and how to use it. 
+* Each folder contains a strategy script, an study script, and a readme file.
+* The strategy script is used for back testing. 
+* The study script is used as indicators on when to buy and when to sell. 
+* The readme me file explains the strength and weekness of the strategy and how to use it. 
 
 
 ## Testing the Scripts
