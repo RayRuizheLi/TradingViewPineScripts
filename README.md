@@ -7,6 +7,7 @@ The repo contains Pine scripts that are tested to work on specific stock, specif
 * The strategy script is used for back testing. 
 * The study script is used as indicators on when to buy and when to sell. 
 * The readme me file explains the strength and weekness of the strategy and how to use it. 
+* This is not a financial advice. Use the scripts at your own risk. 
 
 
 ## Testing the Scripts
