@@ -1,0 +1,41 @@
+// Original Script: https://www.tradingview.com/script/QFC5tySs-noro-s-di-strategy/
+// Modified the script as an indicator that shows when the trend changes as black and white bars. 
+
+
+//@version=3
+study("Noro's DI Ray Version Indicators", overlay = true)
+
+//Settings
+len = input(title="Length", type=integer, defval=14)
+limit = input(3, title = "limit, %")
+fromyear = input(2010, defval = 2010, minval = 1900, maxval = 2100, title = "From Year")
+toyear = input(2021, defval = 2021, minval = 1900, maxval = 2100, title = "To Year")
+frommonth = input(01, defval = 01, minval = 01, maxval = 12, title = "From Month")
+tomonth = input(12, defval = 12, minval = 01, maxval = 12, title = "To Month")
+fromday = input(01, defval = 01, minval = 01, maxval = 31, title = "From day")
+today = input(31, defval = 31, minval = 01, maxval = 31, title = "To day")
+
+//DI
+TrueRange = max(max(high-low, abs(high-nz(close[1]))), abs(low-nz(close[1])))
+DirectionalMovementPlus = high-nz(high[1]) > nz(low[1])-low ? max(high-nz(high[1]), 0): 0
+DirectionalMovementMinus = nz(low[1])-low > high-nz(high[1]) ? max(nz(low[1])-low, 0): 0
+SmoothedTrueRange = 0.0
+SmoothedDirectionalMovementPlus = 0.0
+SmoothedDirectionalMovementMinus = 0.0
+SmoothedTrueRange := nz(SmoothedTrueRange[1]) - (nz(SmoothedTrueRange[1])/len) + TrueRange
+SmoothedDirectionalMovementPlus := nz(SmoothedDirectionalMovementPlus[1]) - (nz(SmoothedDirectionalMovementPlus[1])/len) + DirectionalMovementPlus
+SmoothedDirectionalMovementMinus := nz(SmoothedDirectionalMovementMinus[1]) - (nz(SmoothedDirectionalMovementMinus[1])/len) + DirectionalMovementMinus
+DIPlus = SmoothedDirectionalMovementPlus / SmoothedTrueRange * 100
+DIMinus = SmoothedDirectionalMovementMinus / SmoothedTrueRange * 100
+
+//Trend (Signal)
+trend = 0
+trend := DIPlus > DIMinus + limit ? 1 : DIPlus < DIMinus + limit ? -1 : trend[1]
+
+barcolor(trend == 1 ? black : white)
+
+// Buy in when stock is changes colour from white to black 
+// Sell when stock RSI is about 70~80
+
+
+
