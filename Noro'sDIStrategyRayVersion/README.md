@@ -14,19 +14,23 @@ Script has been modified to long only.
 ### Strategy Script
 
 * Inputs Setting
+![Strategy Setting](https://github.com/RayRuizheLi/TradingViewPineScripts/blob/master/Noro'sDIStrategyRayVersion/Images/StrategySetting.png)
 * How it looks
+![Strategy Proof](https://github.com/RayRuizheLi/TradingViewPineScripts/blob/master/Noro'sDIStrategyRayVersion/Images/StrategyProof.png)
 
 
 ### DI Indicator 
 
 * Inputs Setting
+![DI Indicator Setting](https://github.com/RayRuizheLi/TradingViewPineScripts/blob/master/Noro'sDIStrategyRayVersion/Images/StudySetting.png)
 * How it looks
+![Indicators Proof](https://github.com/RayRuizheLi/TradingViewPineScripts/blob/master/Noro'sDIStrategyRayVersion/Images/StudyProof.png)
 
 
 ### RSI Indicator
 
 * Inputs Setting 
-* How it looks 
+![RSI Indicator Setting](https://github.com/RayRuizheLi/TradingViewPineScripts/blob/master/Noro'sDIStrategyRayVersion/Images/StudyRSI.png)
 
 
 ## Trading Advice 
