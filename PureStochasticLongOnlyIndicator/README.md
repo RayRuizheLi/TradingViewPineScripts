@@ -1,4 +1,4 @@
-# Bollinger RSI Long Only 
+#Pure Stochastic Long Only
 
 Original Script: https://www.tradingview.com/script/I9w8Oesw/
 
