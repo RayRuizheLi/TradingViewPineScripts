@@ -1,0 +1,69 @@
+// For a typical MACD trading script, the script enters when histogram crosses from negative to positive 
+//   and exists when histogram crosses from positive to negative. This is not optimal since it buys in 
+//.  late and sells late. 
+
+// Instead, this script counts the consecurtive rising bars for buy in signal and conscutive falling bars for selling signal.
+//.  This way, buy in price is closer to the lowest point of the dip, and selling price is closer to the peak, thus optimizing 
+//.  amount of earnings per trade. 
+
+//@version=4
+strategy("MACD Rise and Fall", overlay=false, default_qty_type = strategy.percent_of_equity, initial_capital=5000, currency="CAD")
+
+// Date Inputs 
+FromMonth = input(defval = 9, title = "From Month", minval = 1, maxval = 12)
+FromDay   = input(defval = 1, title = "From Day", minval = 1, maxval = 31)
+FromYear  = input(defval = 2019, title = "From Year", minval = 2017)
+ToMonth   = input(defval = 1, title = "To Month", minval = 1, maxval = 12)
+ToDay     = input(defval = 1, title = "To Day", minval = 1, maxval = 31)
+ToYear    = input(defval = 2021, title = "To Year", minval = 2018)
+
+// MACD Inputs 
+contRise = input(title="Continous Rise", type = input.integer, defval=3)
+contDip = input(title="Continous Dip", type = input.integer, defval=3)
+
+// Captial Input
+capital = input(100, defval = 100, minval = 1, maxval = 10000, title = "Capital, %")
+
+// Calculating Moving Averages
+fastMA = input(title="Fast moving average", type=input.integer, defval=12)
+slowMA = input(title="Slow moving average", type=input.integer, defval=26)
+
+// Enter signal
+isEnter = true
+for i = 0 to contRise - 1
+    [curr, _, _] = macd(close[i], fastMA, slowMA, 9)
+    [prev, _, _] = macd(close[i + 1], fastMA, slowMA, 9) 
+    if curr < prev
+        isEnter := false
+
+// Exit signal 
+isClose = true
+for i = 0 to contDip - 1
+    [curr, _, _] = macd(close[i], fastMA, slowMA, 9)
+    [prev, _, _] = macd(close[i + 1], fastMA, slowMA, 9) 
+    if curr > prev
+        isClose := false
+        
+// Plot MACD
+[currMacd, _, _] = macd(close[0], fastMA, slowMA, 9)
+[prevMacd, _, _] = macd(close[1], fastMA, slowMA, 9) 
+
+plotColor = currMacd > 0 ? currMacd > prevMacd ? color.lime : color.green : 
+   currMacd < prevMacd ? color.maroon : color.red
+plot(currMacd, style=plot.style_histogram, color=plotColor, linewidth=3)
+plot(0, title="Zero line", linewidth=1, color=color.gray)
+
+// Date Range Control
+start     = timestamp(FromYear, FromMonth, FromDay, 00, 00)  
+finish    = timestamp(ToYear, ToMonth, ToDay, 23, 59)       
+inDateRange() => time >= start and time <= finish ? true : false 
+
+// Size per trade 
+size = strategy.position_size
+lot = 0.0
+lot := size != size[1] ? strategy.equity / close * capital / 100 : lot[1]
+
+// Trading 
+strategy.entry("Buy", strategy.long, lot, when = inDateRange() and isEnter)
+strategy.close("Buy", isClose)
+
