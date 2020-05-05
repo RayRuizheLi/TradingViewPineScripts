@@ -20,16 +20,17 @@ amount of earnings per trade.
 #### More profit 
 
 * Inputs Setting
-![Strategy Setting](https://github.com/RayRuizheLi/TradingViewPineScripts/blob/master/Noro'sDIStrategyRayVersion/Images/StrategySetting.png)
+![Strategy Setting](https://github.com/RayRuizheLi/TradingViewPineScripts/blob/master/MACDRiseAndFall/Images/ProfitSettings.png)
 * How it looks
-![Strategy Proof](https://github.com/RayRuizheLi/TradingViewPineScripts/blob/master/Noro'sDIStrategyRayVersion/Images/StrategyProof.png)
+![Strategy Proof]
+(https://github.com/RayRuizheLi/TradingViewPineScripts/blob/master/MACDRiseAndFall/Images/ProfitProof.png)
 
 #### Better Accuracy 
 
 * Inputs Setting
-![Strategy Setting](https://github.com/RayRuizheLi/TradingViewPineScripts/blob/master/Noro'sDIStrategyRayVersion/Images/StrategySetting.png)
+![Strategy Setting](https://github.com/RayRuizheLi/TradingViewPineScripts/blob/master/MACDRiseAndFall/Images/AccuracySettings.png)
 * How it looks
-![Strategy Proof](https://github.com/RayRuizheLi/TradingViewPineScripts/blob/master/Noro'sDIStrategyRayVersion/Images/StrategyProof.png)
+![Strategy Proof](https://github.com/RayRuizheLi/TradingViewPineScripts/blob/master/MACDRiseAndFall/Images/AccuracyProof.png)
 
 
 
