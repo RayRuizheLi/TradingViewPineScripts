@@ -3,7 +3,7 @@
 
 //@version= 4
 // https://sauciusfinance.altervista.org
-strategy(title="Pure Stochastic long only", overlay = false, max_bars_back=500)
+strategy(title="Pure Stochastic long only", overlay = false, default_qty_type = strategy.percent_of_equity, initial_capital=5000, currency="CAD", max_bars_back=500)
 
 // INPUTS & calculations
 length = input(10, minval=1)
@@ -13,12 +13,18 @@ smoothK = input(7, minval=1)
 smoothD = input(4, minval=1)
 k = sma(stoch(close, high, low, length), smoothK)
 d = sma(k, smoothD)
+capital = input(100, defval = 100, minval = 1, maxval = 10000, title = "Capital, %")
 
 // Entry condition
 entryl = k > d and k <= OverSold and close >= high[1]
 
+// Size per trade 
+size = strategy.position_size
+lot = 0.0
+lot := size != size[1] ? strategy.equity / close * capital / 100 : lot[1]
+
 // Entry
-strategy.entry("Long", true, when = entryl)
+strategy.entry("Long", strategy.long, lot, when = entryl)
 
 // Exit conditions 
 middle = (OverBought+OverSold)/2
