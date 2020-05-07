@@ -11,9 +11,9 @@ ToYear    = input(defval = 2021, title = "To Year", minval = 2018)
 
 // INPUTS & calculations
 length = input(10, minval=1)
-OverBought = input(80, minval = 50, step = 10)
-OverSold = input(20, minval = 10, step = 5)
-smoothK = input(7, minval=1)
+OverBought = input(70, minval = 50, step = 5)
+OverSold = input(30, minval = 10, step = 5)
+smoothK = input(9, minval=1)
 smoothD = input(4, minval=1)
 k = sma(stoch(close, high, low, length), smoothK)
 d = sma(k, smoothD)
@@ -41,8 +41,8 @@ close2= k < d and k > middle
 close3 = (k >= OverBought)
 
 // Exit 
-strategy.close("Long", when = close2, comment ="cross k&d")
-strategy.close("Long", when = close3, comment = "high value of K")
+strategy.close("Long", when = close2 and inDateRange(), comment ="cross k&d")
+strategy.close("Long", when = close3 and inDateRange(), comment = "high value of K")
 
 // Plot graphs
 plot(k, color=#0000FF,  linewidth= 2, title="k Stoch")
